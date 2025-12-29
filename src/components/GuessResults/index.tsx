@@ -1,0 +1,13 @@
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
+import { range } from '../../utils'
+import Guess from '../Guess'
+
+export default function GuessResults({ guesses, answer }: { guesses: string[]; answer: string }) {
+  return (
+    <div className="guess-results">
+      {range(0, NUM_OF_GUESSES_ALLOWED).map((num) => (
+        <Guess answer={answer} key={num} value={guesses[num]} />
+      ))}
+    </div>
+  )
+}
