@@ -1,5 +1,6 @@
-import { checkGuess } from '../../game-helpers'
-import { range } from '../../utils'
+import { useMemo } from 'react'
+import { checkGuess } from '@/game-helpers'
+import { range } from '@/utils'
 
 function Cell({ letter, status }: { letter: string | undefined; status: string | undefined }) {
   const className = status ? `cell ${status}` : 'cell'
@@ -8,9 +9,9 @@ function Cell({ letter, status }: { letter: string | undefined; status: string |
 }
 
 export default function Guess({ value, answer }: { value: string; answer: string }) {
-  const result = checkGuess(value, answer)
+  const result = useMemo(() => checkGuess(value, answer), [value, answer])
 
-  console.log({ result })
+  console.log('hi')
 
   return (
     <p className="guess">

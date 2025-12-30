@@ -5,7 +5,7 @@ type ResultItems = {
 
 type LetterCounts = Record<string, number>
 
-export function checkGuess(guess: string, answer: string) {
+export function checkGuess(guess: string, answer: string): ResultItems[] | null {
   if (!guess) {
     return null
   }
@@ -17,7 +17,7 @@ export function checkGuess(guess: string, answer: string) {
   const guessChars = guess.toUpperCase()
   const answerChars = answer.toUpperCase()
 
-  const result = Array<ResultItems>(guess.length)
+  const result: ResultItems[] = Array.from({ length: guessChars.length })
   const letterCounts: LetterCounts = Object.create(null)
 
   for (const char of answerChars) {
