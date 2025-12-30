@@ -14,7 +14,7 @@ export default function Guess({ value, answer }: { value: string; answer: string
 
   return (
     <p className="guess">
-      {range(0, 5).map((num) => (
+      {range(5).map((num) => (
         <Cell
           key={num}
           letter={result ? result[num].letter : undefined}
