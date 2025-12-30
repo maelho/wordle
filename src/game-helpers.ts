@@ -1,53 +1,51 @@
-/**
- * Thanks to Github user dylano for supplying a more-accurate
- * solving algorithm!
- */
+type ResultItems = {
+  letter: string
+  status: 'correct' | 'misplaced' | 'incorrect'
+}
+
+type LetterCounts = Record<string, number>
 
 export function checkGuess(guess: string, answer: string) {
-  // This constant is a placeholder that indicates we've successfully
-  // dealt with this character (it's correct, or misplaced).
-  const SOLVED_CHAR = '✓'
-
   if (!guess) {
     return null
   }
 
-  const guessChars = guess.toUpperCase().split('')
-  const answerChars = answer.split('')
+  if (guess.length !== answer.length) {
+    throw new Error('The guess and answer must be the same length.')
+  }
 
-  const result = []
+  const guessChars = guess.toUpperCase()
+  const answerChars = answer.toUpperCase()
 
-  // Step 1: Look for correct letters.
-  for (let i = 0; i < guessChars.length; i++) {
-    if (guessChars[i] === answerChars[i]) {
-      result[i] = {
-        letter: guessChars[i],
-        status: 'correct',
-      }
-      answerChars[i] = SOLVED_CHAR
-      guessChars[i] = SOLVED_CHAR
+  const result = Array<ResultItems>(guess.length)
+  const letterCounts: LetterCounts = Object.create(null)
+
+  for (const char of answerChars) {
+    letterCounts[char] = (letterCounts[char] || 0) + 1
+  }
+
+  // correct letters
+  for (let i = 0; i < guess.length; i++) {
+    const g = guessChars[i]
+    const a = answerChars[i]
+
+    if (guessChars[i] === a) {
+      result[i] = { letter: g, status: 'correct' }
+      letterCounts[g]--
     }
   }
 
-  // Step 2: look for misplaced letters. If it's not misplaced,
-  // it must be incorrect.
-  for (let i = 0; i < guessChars.length; i++) {
-    if (guessChars[i] === SOLVED_CHAR) {
-      continue
-    }
+  // misplaced and incorrect letters
+  for (let i = 0; i < guess.length; i++) {
+    if (result[i]) continue
 
-    let status = 'incorrect'
+    const g = guessChars[i]
 
-    const misplacedIndex = answerChars.indexOf(guessChars[i])
-
-    if (misplacedIndex >= 0) {
-      status = 'misplaced'
-      answerChars[misplacedIndex] = SOLVED_CHAR
-    }
-
-    result[i] = {
-      letter: guessChars[i],
-      status,
+    if (letterCounts[i] > 0) {
+      result[i] = { letter: g, status: 'misplaced' }
+      letterCounts[g]--
+    } else {
+      result[i] = { letter: g, status: 'incorrect' }
     }
   }
 
