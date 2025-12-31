@@ -1,4 +1,3 @@
-
 # Simple workflow for deploying static content to GitHub Pages (Bun)
 name: Deploy static content to Pages
 
@@ -36,7 +35,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build
-        env:
         run: bun run build
 
       - name: Setup Pages
