@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
-import { WORDS } from '../../data'
-import { sample } from '../../utils'
+import { useMemo, useState } from 'react'
+import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
+import { WORD_SET } from '@/data'
+import { getRandomWord } from '@/utils'
 
-import GuessInput from '../GuessInput'
-import GuessResults from '../GuessResults'
-import LostBanner from '../LostBanner'
-import WonBanner from '../WonBanner'
-
-const answer = sample(WORDS)
-console.log({ answer })
+import GameBanner from './game-banner'
+import GuessGrid from './guess-grid'
+import GuessInput from './guess-input'
 
 export default function Game() {
+  const answer = useMemo(() => getRandomWord(WORD_SET), [])
+
   const [gameStatus, setGameStatus] = useState<'running' | 'won' | 'lost'>('running')
   const [guesses, setGuesses] = useState<string[]>([])
 
@@ -27,11 +25,10 @@ export default function Game() {
   }
 
   return (
-    <>
-      <GuessResults answer={answer} guesses={guesses} />
+    <div className="flex flex-col gap-6">
+      {gameStatus !== 'running' && <GameBanner answer={answer} numOfGuesses={guesses.length} status={gameStatus} />}
+      <GuessGrid answer={answer} guesses={guesses} />
       <GuessInput gameStatus={gameStatus} handleSubmitGuess={handleSubmitGuess} />
-      {gameStatus === 'won' && <WonBanner numOfGuesses={guesses.length} />}
-      {gameStatus === 'lost' && <LostBanner answer={answer} />}
-    </>
+    </div>
   )
 }
