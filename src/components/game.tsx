@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
 import { WORD_SET } from '@/data'
 import { getRandomWord } from '@/utils'
@@ -7,21 +7,62 @@ import GameBanner from './game-banner'
 import GuessGrid from './guess-grid'
 import GuessInput from './guess-input'
 
-export default function Game() {
-  const answer = useMemo(() => getRandomWord(WORD_SET), [])
+const STORAGE_KEY = 'wordle-game-state'
 
-  const [gameStatus, setGameStatus] = useState<'running' | 'won' | 'lost'>('running')
-  const [guesses, setGuesses] = useState<string[]>([])
+interface GameState {
+  answer: string
+  guesses: string[]
+  gameStatus: 'running' | 'won' | 'lost'
+}
+
+function getStoredGameState(): GameState {
+  const stored = localStorage.getItem(STORAGE_KEY)
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored) as GameState
+      if (parsed.answer && Array.isArray(parsed.guesses) && parsed.gameStatus) {
+        return parsed
+      }
+    } catch {
+      // Invalid JSON, create new state
+    }
+  }
+  const newAnswer = getRandomWord(WORD_SET)
+  return {
+    answer: newAnswer,
+    guesses: [],
+    gameStatus: 'running',
+  }
+}
+
+function saveGameState(state: GameState): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+}
+
+export default function Game() {
+  const [gameState, setGameState] = useState<GameState>(() => getStoredGameState())
+
+  const { answer, guesses, gameStatus } = gameState
+
+  useEffect(() => {
+    saveGameState(gameState)
+  }, [gameState])
 
   const handleSubmitGuess = (tentativeGuess: string) => {
     const nextGuesses = [...guesses, tentativeGuess]
-    setGuesses(nextGuesses)
+    let nextStatus: 'running' | 'won' | 'lost' = 'running'
 
     if (tentativeGuess.toUpperCase() === answer) {
-      setGameStatus('won')
-    } else if (guesses.length + 1 >= NUM_OF_GUESSES_ALLOWED) {
-      setGameStatus('lost')
+      nextStatus = 'won'
+    } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+      nextStatus = 'lost'
     }
+
+    setGameState({
+      answer,
+      guesses: nextGuesses,
+      gameStatus: nextStatus,
+    })
   }
 
   return (
