@@ -41,7 +41,7 @@ export function checkGuess(guess: string, answer: string): ResultItems[] | null 
 
     const g = guessChars[i]
 
-    if (letterCounts[i] > 0) {
+    if (letterCounts[g] > 0) {
       result[i] = { letter: g, status: 'misplaced' }
       letterCounts[g]--
     } else {
