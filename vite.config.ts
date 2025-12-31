@@ -1,13 +1,14 @@
 import path from 'node:path'
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  //   base: '/game-hub/',
-  // preview: {
-  //   port: 4173,
-  // },
+  base: '/wordle/',
+  preview: {
+    port: 4173,
+  },
   appType: 'spa',
   resolve: {
     alias: {
@@ -21,5 +22,6 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
+    tailwindcss(),
   ],
 })

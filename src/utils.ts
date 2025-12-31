@@ -1,4 +1,7 @@
-export const sample = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
+export const getRandomWord = (words: readonly string[]) => {
+  const index = Math.floor(Math.random() * words.length)
+  return words[index]
+}
 
 export const range = (start: number = 0, end?: number, step: number = 1) => {
   if (end === undefined) {

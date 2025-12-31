@@ -6,6 +6,8 @@ type ResultItems = {
 type LetterCounts = Record<string, number>
 
 export function checkGuess(guess: string, answer: string): ResultItems[] | null {
+  console.log({ answer })
+
   if (!guess) {
     return null
   }

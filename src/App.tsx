@@ -1,16 +1,11 @@
-import Game from './components/Game'
-import Header from './components/Header'
-
-import './App.css'
+import Game from '@/components/game'
 
 export default function App() {
   return (
-    <div className="wrapper">
-      <Header />
-
-      <div className="game-wrapper">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <main className="flex flex-1 flex-col items-center justify-center p-4">
         <Game />
-      </div>
+      </main>
     </div>
   )
 }
