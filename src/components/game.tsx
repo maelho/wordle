@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
 import { WORD_SET } from '@/data'
+import { getLetterState } from '@/game-helpers'
 import { getRandomWord } from '@/utils'
 
 import GameBanner from './game-banner'
@@ -65,11 +66,24 @@ export default function Game() {
     })
   }
 
+  const letterState = useMemo(() => getLetterState(guesses, answer), [answer, guesses])
+
+  const startNewGame = useCallback(() => {
+    const newAnswer = getRandomWord(WORD_SET)
+    setGameState({
+      answer: newAnswer,
+      guesses: [],
+      gameStatus: 'running',
+    })
+  }, [])
+
   return (
     <div className="flex flex-col gap-6">
-      {gameStatus !== 'running' && <GameBanner answer={answer} numOfGuesses={guesses.length} status={gameStatus} />}
+      {gameStatus !== 'running' && (
+        <GameBanner answer={answer} numOfGuesses={guesses.length} onNewGame={startNewGame} status={gameStatus} />
+      )}
       <GuessGrid answer={answer} guesses={guesses} />
-      <GuessInput gameStatus={gameStatus} handleSubmitGuess={handleSubmitGuess} />
+      <GuessInput gameStatus={gameStatus} handleSubmitGuess={handleSubmitGuess} letterStatuses={letterState} />
     </div>
   )
 }
