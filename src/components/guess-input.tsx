@@ -7,10 +7,10 @@ import Keyboard from './keyboard'
 type GuessInputProps = {
   handleSubmitGuess: (guess: string) => void
   gameStatus: 'running' | 'won' | 'lost'
-  letterStatuses: Record<string, LetterStatus>
+  letterState: Record<string, LetterStatus>
 }
 
-export default function GuessInput({ handleSubmitGuess, gameStatus, letterStatuses }: GuessInputProps) {
+export default function GuessInput({ handleSubmitGuess, gameStatus, letterState }: GuessInputProps) {
   const [tentativeGuess, setTentativeGuess] = useState('')
   const [error, setError] = useState<string | null>(null)
 
@@ -103,7 +103,7 @@ export default function GuessInput({ handleSubmitGuess, gameStatus, letterStatus
         )}
       </form>
 
-      <Keyboard disabled={isDisabled} letterStatuses={letterStatuses} onKeyPress={handleKeyPress} />
+      <Keyboard disabled={isDisabled} letterState={letterState} onKeyPress={handleKeyPress} />
     </div>
   )
 }

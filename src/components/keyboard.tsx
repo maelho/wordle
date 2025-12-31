@@ -1,4 +1,4 @@
-import { statusStyles, type LetterStatus } from '@/game-helpers'
+import { type LetterStatus, statusStyles } from '@/game-helpers'
 import { cn } from '@/lib/utils'
 import PixelCorners from './pixel-corners'
 
@@ -9,12 +9,12 @@ const KEYBOARD_ROWS = [
 ]
 
 type KeyboardProps = {
-  letterStatuses: Record<string, LetterStatus>
+  letterState: Record<string, LetterStatus>
   onKeyPress: (key: string) => void
   disabled?: boolean
 }
 
-export default function Keyboard({ letterStatuses, onKeyPress, disabled = false }: KeyboardProps) {
+export default function Keyboard({ letterState, onKeyPress, disabled = false }: KeyboardProps) {
   const handleKeyClick = (key: string) => {
     if (disabled) return
     onKeyPress(key)
@@ -25,7 +25,7 @@ export default function Keyboard({ letterStatuses, onKeyPress, disabled = false 
       {KEYBOARD_ROWS.map((row) => (
         <div className="flex justify-center gap-1 md:gap-1.5" key={row.join('')}>
           {row.map((key) => {
-            const status = letterStatuses[key]
+            const status = letterState[key]
             const isSpecialKey = key === 'ENTER' || key === 'BACK'
 
             return (
