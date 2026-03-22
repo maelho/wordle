@@ -1,17 +1,17 @@
-import { motion } from 'motion/react'
-import { Button } from '@/components/ui/8bit/button'
-import { Card, CardContent } from '@/components/ui/8bit/card'
-import { cn } from '@/lib/utils'
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/8bit/button";
+import { Card, CardContent } from "@/components/ui/8bit/card";
+import { cn } from "@/lib/utils";
 
 type GameBannerProps = {
-  status: 'won' | 'lost'
-  answer: string
-  numOfGuesses?: number
-  onNewGame: () => void
-}
+  status: "won" | "lost";
+  answer: string;
+  numOfGuesses?: number;
+  onNewGame: () => void;
+};
 
 export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: GameBannerProps) {
-  const isWon = status === 'won'
+  const isWon = status === "won";
 
   return (
     <motion.div
@@ -29,11 +29,11 @@ export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: 
       initial={{ scale: 0, opacity: 0 }}
       transition={{
         duration: isWon ? 0.5 : 0.4,
-        ease: 'easeOut',
+        ease: "easeOut",
       }}
       whileInView={{ opacity: 1 }}
     >
-      <Card className={cn('mx-auto max-w-md', isWon ? 'border-green-500' : 'border-red-500')}>
+      <Card className={cn("mx-auto max-w-md", isWon ? "border-green-500" : "border-red-500")}>
         <CardContent className="p-4 text-center">
           {isWon ? (
             <motion.p
@@ -42,7 +42,8 @@ export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: 
               transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 1 }}
             >
               <span className="text-green-500">Congratulations!</span>
-              Got it in <strong>{numOfGuesses === 1 ? '1 guess' : `${numOfGuesses} guesses`}</strong>
+              Got it in{" "}
+              <strong>{numOfGuesses === 1 ? "1 guess" : `${numOfGuesses} guesses`}</strong>
             </motion.p>
           ) : (
             <p className="text-sm md:text-base">
@@ -56,5 +57,5 @@ export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: 
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }

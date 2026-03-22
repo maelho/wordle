@@ -1,15 +1,15 @@
-import { useMemo } from 'react'
-import { checkGuess } from '@/game-helpers'
-import { range } from '@/utils'
-import GuessCell from './guess-cell'
+import { useMemo } from "react";
+import { checkGuess } from "@/game-helpers";
+import { range } from "@/utils";
+import GuessCell from "./guess-cell";
 
 type GuessRowProps = {
-  value: string | undefined
-  answer: string
-}
+  value: string | undefined;
+  answer: string;
+};
 
 export default function GuessRow({ value, answer }: GuessRowProps) {
-  const result = useMemo(() => (value ? checkGuess(value, answer) : null), [value, answer])
+  const result = useMemo(() => (value ? checkGuess(value, answer) : null), [value, answer]);
 
   return (
     <div className="flex justify-center gap-1 md:gap-2">
@@ -22,5 +22,5 @@ export default function GuessRow({ value, answer }: GuessRowProps) {
         />
       ))}
     </div>
-  )
+  );
 }

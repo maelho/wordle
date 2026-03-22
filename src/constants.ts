@@ -1,1 +1,1 @@
-export const NUM_OF_GUESSES_ALLOWED = 6 as const
+export const NUM_OF_GUESSES_ALLOWED = 6 as const;

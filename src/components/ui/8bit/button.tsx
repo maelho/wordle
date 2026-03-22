@@ -1,54 +1,53 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import { Button as ShadcnButton } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from "class-variance-authority";
+import { Button as ShadcnButton } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-import './styles/retro.css'
+import "./styles/retro.css";
 
-export const buttonVariants = cva('', {
+export const buttonVariants = cva("", {
   variants: {
     font: {
-      normal: '',
-      retro: 'retro',
+      normal: "",
+      retro: "retro",
     },
     variant: {
-      default: 'bg-foreground',
-      destructive: 'bg-foreground',
-      outline: 'bg-foreground',
-      secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-      ghost: 'hover:bg-accent hover:text-accent-foreground',
-      link: 'text-primary underline-offset-4 hover:underline',
+      default: "bg-foreground",
+      destructive: "bg-foreground",
+      outline: "bg-foreground",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-foreground",
+      link: "text-primary underline-offset-4 hover:underline",
     },
     size: {
-      default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-      sm: 'h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5',
-      lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
-      icon: 'size-9',
+      default: "h-9 px-4 py-2 has-[>svg]:px-3",
+      sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
+      lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+      icon: "size-9",
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'default',
+    variant: "default",
+    size: "default",
   },
-})
+});
 
 export interface BitButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-  ref?: React.Ref<HTMLButtonElement>
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 function Button({ children, asChild, ...props }: BitButtonProps) {
-  const { variant, size, className, font } = props
+  const { variant, size, className, font } = props;
 
   return (
     <ShadcnButton
       {...props}
       asChild={asChild}
       className={cn(
-        'relative m-1.5 inline-flex items-center justify-center gap-1.5 rounded-none border-none transition-transform active:translate-y-1',
-        size === 'icon' && 'mx-1 my-0',
-        font !== 'normal' && 'retro',
+        "relative m-1.5 inline-flex items-center justify-center gap-1.5 rounded-none border-none transition-transform active:translate-y-1",
+        size === "icon" && "mx-1 my-0",
+        font !== "normal" && "retro",
         className,
       )}
       size={size}
@@ -58,7 +57,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
         <span className="relative inline-flex items-center justify-center gap-1.5">
           {children}
 
-          {variant !== 'ghost' && variant !== 'link' && size !== 'icon' && (
+          {variant !== "ghost" && variant !== "link" && size !== "icon" && (
             <>
               {/* Pixelated border */}
               <div className="absolute -top-1.5 left-1.5 h-1.5 w-1/2 bg-ring" />
@@ -71,7 +70,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
               <div className="absolute right-0 bottom-0 size-1.5 bg-ring" />
               <div className="absolute top-1.5 -left-1.5 h-[calc(100%-12px)] w-1.5 bg-ring" />
               <div className="absolute top-1.5 -right-1.5 h-[calc(100%-12px)] w-1.5 bg-ring" />
-              {variant !== 'outline' && (
+              {variant !== "outline" && (
                 <>
                   {/* Top shadow */}
                   <div className="absolute top-0 left-0 h-1.5 w-full bg-foreground/20" />
@@ -85,7 +84,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
             </>
           )}
 
-          {size === 'icon' && (
+          {size === "icon" && (
             <>
               <div className="pointer-events-none absolute top-0 left-0 h-[5px] w-full bg-ring md:h-1.5" />
               <div className="pointer-events-none absolute bottom-0 h-[5px] w-full bg-ring md:h-1.5" />
@@ -100,7 +99,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
         <>
           {children}
 
-          {variant !== 'ghost' && variant !== 'link' && size !== 'icon' && (
+          {variant !== "ghost" && variant !== "link" && size !== "icon" && (
             <>
               {/* Pixelated border */}
               <div className="absolute -top-1.5 left-1.5 h-1.5 w-1/2 bg-ring" />
@@ -113,7 +112,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
               <div className="absolute right-0 bottom-0 size-1.5 bg-ring" />
               <div className="absolute top-1.5 -left-1.5 h-[calc(100%-12px)] w-1.5 bg-ring" />
               <div className="absolute top-1.5 -right-1.5 h-[calc(100%-12px)] w-1.5 bg-ring" />
-              {variant !== 'outline' && (
+              {variant !== "outline" && (
                 <>
                   {/* Top shadow */}
                   <div className="absolute top-0 left-0 h-1.5 w-full bg-foreground/20" />
@@ -127,7 +126,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
             </>
           )}
 
-          {size === 'icon' && (
+          {size === "icon" && (
             <>
               <div className="pointer-events-none absolute top-0 left-0 h-[5px] w-full bg-ring md:h-1.5" />
               <div className="pointer-events-none absolute bottom-0 h-[5px] w-full bg-ring md:h-1.5" />
@@ -140,7 +139,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
         </>
       )}
     </ShadcnButton>
-  )
+  );
 }
 
-export { Button }
+export { Button };

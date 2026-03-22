@@ -1,11 +1,11 @@
-import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
-import { range } from '@/utils'
-import GuessRow from './guess-row'
+import { NUM_OF_GUESSES_ALLOWED } from "@/constants";
+import { range } from "@/utils";
+import GuessRow from "./guess-row";
 
 type GuessGridProps = {
-  guesses: string[]
-  answer: string
-}
+  guesses: string[];
+  answer: string;
+};
 
 export default function GuessGrid({ guesses, answer }: GuessGridProps) {
   return (
@@ -14,5 +14,5 @@ export default function GuessGrid({ guesses, answer }: GuessGridProps) {
         <GuessRow answer={answer} key={index} value={guesses[index]} />
       ))}
     </div>
-  )
+  );
 }
