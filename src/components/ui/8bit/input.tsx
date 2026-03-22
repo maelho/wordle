@@ -1,44 +1,49 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import { Input as ShadcnInput } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from "class-variance-authority"
 
-import './styles/retro.css'
+import { Input as ShadcnInput } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
-export const inputVariants = cva('', {
+import "./styles/retro.css"
+
+export const inputVariants = cva("", {
   variants: {
     font: {
-      normal: '',
-      retro: 'retro',
+      normal: "",
+      retro: "retro",
     },
   },
   defaultVariants: {
-    font: 'retro',
+    font: "retro",
   },
 })
 
-export interface BitInputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
+export interface BitInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
   asChild?: boolean
 }
 
 function Input({ ...props }: BitInputProps) {
   const { className, font } = props
-  const isInvalid = props['aria-invalid']
+  const isInvalid = props["aria-invalid"]
 
   return (
     <div
       className={cn(
-        '!p-0 relative flex items-center border-y-6',
-        isInvalid ? 'border-destructive' : 'border-ring',
+        "relative flex items-center border-y-6 !p-0",
+        isInvalid ? "border-destructive" : "border-ring",
         className,
       )}
     >
-      <ShadcnInput {...props} className={cn('!w-full rounded-none ring-0', font !== 'normal' && 'retro', className)} />
+      <ShadcnInput
+        {...props}
+        className={cn("!w-full rounded-none ring-0", font !== "normal" && "retro", className)}
+      />
 
       <div
         aria-hidden="true"
         className={cn(
-          'pointer-events-none absolute inset-0 -mx-1.5 border-x-6',
-          isInvalid ? 'border-destructive' : 'border-ring',
+          "pointer-events-none absolute inset-0 -mx-1.5 border-x-6",
+          isInvalid ? "border-destructive" : "border-ring",
         )}
       />
     </div>

@@ -1,4 +1,4 @@
-export type LetterStatus = 'correct' | 'misplaced' | 'incorrect'
+export type LetterStatus = "correct" | "misplaced" | "incorrect"
 
 type ResultItems = {
   letter: string
@@ -13,7 +13,7 @@ export function checkGuess(guess: string, answer: string): ResultItems[] | null 
   }
 
   if (guess.length !== answer.length) {
-    throw new Error('The guess and answer must be the same length.')
+    throw new Error("The guess and answer must be the same length.")
   }
 
   const guessChars = guess.toUpperCase()
@@ -32,7 +32,7 @@ export function checkGuess(guess: string, answer: string): ResultItems[] | null 
     const a = answerChars[i]
 
     if (guessChars[i] === a) {
-      result[i] = { letter: g, status: 'correct' }
+      result[i] = { letter: g, status: "correct" }
       letterCounts[g]--
     }
   }
@@ -44,10 +44,10 @@ export function checkGuess(guess: string, answer: string): ResultItems[] | null 
     const g = guessChars[i]
 
     if (letterCounts[g] > 0) {
-      result[i] = { letter: g, status: 'misplaced' }
+      result[i] = { letter: g, status: "misplaced" }
       letterCounts[g]--
     } else {
-      result[i] = { letter: g, status: 'incorrect' }
+      result[i] = { letter: g, status: "incorrect" }
     }
   }
 
@@ -65,12 +65,12 @@ export function getLetterState(guesses: string[], answer: string): Record<string
       const currentStatus = state[letter]
 
       // status: correct > misplaced > incorrect
-      if (status === 'correct') {
-        state[letter] = 'correct'
-      } else if (status === 'misplaced' && currentStatus !== 'correct') {
-        state[letter] = 'misplaced'
-      } else if (status === 'incorrect' && !currentStatus) {
-        state[letter] = 'incorrect'
+      if (status === "correct") {
+        state[letter] = "correct"
+      } else if (status === "misplaced" && currentStatus !== "correct") {
+        state[letter] = "misplaced"
+      } else if (status === "incorrect" && !currentStatus) {
+        state[letter] = "incorrect"
       }
     }
   }
@@ -79,14 +79,14 @@ export function getLetterState(guesses: string[], answer: string): Record<string
 }
 
 export const statusStyles: Record<LetterStatus, string> = {
-  correct: 'bg-green-500 border-green-700 text-white',
-  misplaced: 'bg-yellow-500 border-yellow-700 text-white',
-  incorrect: 'bg-muted border-muted-foreground/50 text-muted-foreground',
+  correct: "bg-green-500 border-green-700 text-white",
+  misplaced: "bg-yellow-500 border-yellow-700 text-white",
+  incorrect: "bg-muted border-muted-foreground/50 text-muted-foreground",
 }
 
 export const pixelCornerClasses = [
-  'pointer-events-none absolute -top-1 -left-1 h-1 w-1 bg-background',
-  'pointer-events-none absolute -top-1 -right-1 h-1 w-1 bg-background',
-  'pointer-events-none absolute -bottom-1 -left-1 h-1 w-1 bg-background',
-  'pointer-events-none absolute -right-1 -bottom-1 h-1 w-1 bg-background',
+  "pointer-events-none absolute -top-1 -left-1 h-1 w-1 bg-background",
+  "pointer-events-none absolute -top-1 -right-1 h-1 w-1 bg-background",
+  "pointer-events-none absolute -bottom-1 -left-1 h-1 w-1 bg-background",
+  "pointer-events-none absolute -right-1 -bottom-1 h-1 w-1 bg-background",
 ] as const

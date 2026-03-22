@@ -1,11 +1,12 @@
-import { atom } from 'jotai'
-import { atomWithStorage } from 'jotai/utils'
-import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
-import { WORD_SET } from '@/data'
-import { getLetterState, type LetterStatus } from '@/game-helpers'
-import { getRandomWord } from '@/utils'
+import { atom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 
-export type GameStatus = 'running' | 'won' | 'lost'
+import { NUM_OF_GUESSES_ALLOWED } from "@/constants"
+import { WORD_SET } from "@/data"
+import { getLetterState, type LetterStatus } from "@/game-helpers"
+import { getRandomWord } from "@/utils"
+
+export type GameStatus = "running" | "won" | "lost"
 
 export interface GameState {
   answer: string
@@ -13,13 +14,13 @@ export interface GameState {
   gameStatus: GameStatus
 }
 
-const STORAGE_KEY = 'wordle-game-state'
+const STORAGE_KEY = "wordle-game-state"
 
 function createInitialState(): GameState {
   return {
     answer: getRandomWord(WORD_SET),
     guesses: [],
-    gameStatus: 'running',
+    gameStatus: "running",
   }
 }
 
@@ -40,15 +41,15 @@ export const submitGuessAtom = atom(null, (get, set, tentativeGuess: string) => 
   const currentState = get(gameStateAtom)
   const { answer, guesses, gameStatus } = currentState
 
-  if (gameStatus !== 'running') return
+  if (gameStatus !== "running") return
 
   const nextGuesses = [...guesses, tentativeGuess]
-  let nextStatus: GameStatus = 'running'
+  let nextStatus: GameStatus = "running"
 
   if (tentativeGuess.toUpperCase() === answer) {
-    nextStatus = 'won'
+    nextStatus = "won"
   } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
-    nextStatus = 'lost'
+    nextStatus = "lost"
   }
 
   set(gameStateAtom, {
@@ -63,6 +64,6 @@ export const startNewGameAtom = atom(null, (_get, set) => {
   set(gameStateAtom, {
     answer: newAnswer,
     guesses: [],
-    gameStatus: 'running',
+    gameStatus: "running",
   })
 })

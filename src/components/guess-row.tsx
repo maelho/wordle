@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
-import { checkGuess } from '@/game-helpers'
-import { range } from '@/utils'
-import GuessCell from './guess-cell'
+import { useMemo } from "react"
+
+import { checkGuess } from "@/game-helpers"
+import { range } from "@/utils"
+
+import GuessCell from "./guess-cell"
 
 type GuessRowProps = {
   value: string | undefined

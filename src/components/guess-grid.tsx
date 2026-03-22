@@ -1,6 +1,7 @@
-import { NUM_OF_GUESSES_ALLOWED } from '@/constants'
-import { range } from '@/utils'
-import GuessRow from './guess-row'
+import { NUM_OF_GUESSES_ALLOWED } from "@/constants"
+import { range } from "@/utils"
+
+import GuessRow from "./guess-row"
 
 type GuessGridProps = {
   guesses: string[]
