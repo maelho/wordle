@@ -1,8 +1,9 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { Button as ShadcnButton } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority"
 
-import "./styles/retro.css";
+import { Button as ShadcnButton } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+
+import "./styles/retro.css"
 
 export const buttonVariants = cva("", {
   variants: {
@@ -29,16 +30,16 @@ export const buttonVariants = cva("", {
     variant: "default",
     size: "default",
   },
-});
+})
 
 export interface BitButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  ref?: React.Ref<HTMLButtonElement>;
+  asChild?: boolean
+  ref?: React.Ref<HTMLButtonElement>
 }
 
 function Button({ children, asChild, ...props }: BitButtonProps) {
-  const { variant, size, className, font } = props;
+  const { variant, size, className, font } = props
 
   return (
     <ShadcnButton
@@ -139,7 +140,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
         </>
       )}
     </ShadcnButton>
-  );
+  )
 }
 
-export { Button };
+export { Button }

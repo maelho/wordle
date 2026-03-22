@@ -117,4 +117,4 @@ export const WORD_SET = [
   "WOMEN",
   "WRITE",
   "YOUTH",
-];
+]

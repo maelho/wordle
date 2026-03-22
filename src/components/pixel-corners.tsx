@@ -1,4 +1,4 @@
-import { pixelCornerClasses } from "@/game-helpers";
+import { pixelCornerClasses } from "@/game-helpers"
 
 export default function PixelCorners() {
   return (
@@ -7,5 +7,5 @@ export default function PixelCorners() {
         <div className={className} key={className} />
       ))}
     </>
-  );
+  )
 }

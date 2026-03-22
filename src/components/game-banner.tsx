@@ -1,17 +1,18 @@
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/8bit/button";
-import { Card, CardContent } from "@/components/ui/8bit/card";
-import { cn } from "@/lib/utils";
+import { motion } from "motion/react"
+
+import { Button } from "@/components/ui/8bit/button"
+import { Card, CardContent } from "@/components/ui/8bit/card"
+import { cn } from "@/lib/utils"
 
 type GameBannerProps = {
-  status: "won" | "lost";
-  answer: string;
-  numOfGuesses?: number;
-  onNewGame: () => void;
-};
+  status: "won" | "lost"
+  answer: string
+  numOfGuesses?: number
+  onNewGame: () => void
+}
 
 export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: GameBannerProps) {
-  const isWon = status === "won";
+  const isWon = status === "won"
 
   return (
     <motion.div
@@ -57,5 +58,5 @@ export default function GameBanner({ status, answer, numOfGuesses, onNewGame }: 
         </CardContent>
       </Card>
     </motion.div>
-  );
+  )
 }

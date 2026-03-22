@@ -1,4 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai"
+
 import {
   answerAtom,
   gameStatusAtom,
@@ -6,20 +7,20 @@ import {
   letterStateAtom,
   startNewGameAtom,
   submitGuessAtom,
-} from "@/store";
+} from "@/store"
 
-import GameBanner from "./game-banner";
-import GuessGrid from "./guess-grid";
-import GuessInput from "./guess-input";
+import GameBanner from "./game-banner"
+import GuessGrid from "./guess-grid"
+import GuessInput from "./guess-input"
 
 export default function Game() {
-  const answer = useAtomValue(answerAtom);
-  const guesses = useAtomValue(guessesAtom);
-  const gameStatus = useAtomValue(gameStatusAtom);
-  const letterState = useAtomValue(letterStateAtom);
+  const answer = useAtomValue(answerAtom)
+  const guesses = useAtomValue(guessesAtom)
+  const gameStatus = useAtomValue(gameStatusAtom)
+  const letterState = useAtomValue(letterStateAtom)
 
-  const submitGuess = useSetAtom(submitGuessAtom);
-  const startNewGame = useSetAtom(startNewGameAtom);
+  const submitGuess = useSetAtom(submitGuessAtom)
+  const startNewGame = useSetAtom(startNewGameAtom)
 
   return (
     <div className="relative">
@@ -42,5 +43,5 @@ export default function Game() {
         />
       </div>
     </div>
-  );
+  )
 }

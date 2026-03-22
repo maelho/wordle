@@ -1,8 +1,9 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { Input as ShadcnInput } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority"
 
-import "./styles/retro.css";
+import { Input as ShadcnInput } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+
+import "./styles/retro.css"
 
 export const inputVariants = cva("", {
   variants: {
@@ -14,21 +15,21 @@ export const inputVariants = cva("", {
   defaultVariants: {
     font: "retro",
   },
-});
+})
 
 export interface BitInputProps
   extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
-  asChild?: boolean;
+  asChild?: boolean
 }
 
 function Input({ ...props }: BitInputProps) {
-  const { className, font } = props;
-  const isInvalid = props["aria-invalid"];
+  const { className, font } = props
+  const isInvalid = props["aria-invalid"]
 
   return (
     <div
       className={cn(
-        "!p-0 relative flex items-center border-y-6",
+        "relative flex items-center border-y-6 !p-0",
         isInvalid ? "border-destructive" : "border-ring",
         className,
       )}
@@ -46,7 +47,7 @@ function Input({ ...props }: BitInputProps) {
         )}
       />
     </div>
-  );
+  )
 }
 
-export { Input };
+export { Input }
